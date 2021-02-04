@@ -37,9 +37,15 @@ for ix in close_arr:
     relative_calc = np.ndarray.tolist(ta.RSI(bnf_close[ix], timeperiod=4))
     print(close_arr[ix])
     ix = ix + 1
+
+
+##################
+
+b = 1
+for x in range (len(close_arr)):
+    print(close_arr[x], "Is the close number ", x)
+    print(b)
+    b = b + 1
 '''
-
-
-for x in range (15,len(close_arr)):
-    #print(close_arr[x])
-    relative_calc = np.ndarray.tolist(ta.RSI(bnf_close[x], timeperiod=4))
+relative_calc = np.ndarray.tolist(ta.RSI(close_arr, timeperiod=4))
+print(relative_calc,"\n")
