@@ -1,13 +1,14 @@
 import numpy as np
-import talib as ta 
+import talib 
 from nsepy import get_history as gh
 import datetime as dt 
 
 
 #import values from nsepy and print technical indicator values
 symbol = 'BANKNIFTY'
-start = dt.date(2020,10,1)
-end = dt.date(2021,1,29)
+start = dt.date(2018,1,1)
+end = dt.date(2020,12,31)
+
 
 #get data
 data = gh(symbol, start, end, index=True)
@@ -16,36 +17,33 @@ bnf_open = list((data["Open"]))
 bnf_high = list((data["High"]))
 bnf_low = list((data["Low"]))
 bnf_close = list((data["Close"]))
+bnf_vol = list((data["Volume"]))
 
-#print("Open:", bnf_open,"\n")
-#print("High:", bnf_high,"\n")
-#print("Low:", bnf_low,"\n")
-#print("Close:", bnf_close,"\n")
+'''
+for i in range(len(bnf_close)):
+    ohlclist = list((bnf_open[i],bnf_high[i],bnf_low[i],bnf_close[i]))
+    print((ohlclist))
+'''
 
 open_arr = np.array(bnf_open)
 high_arr = np.array(bnf_high)
 low_arr = np.array(bnf_low)
 close_arr = np.array(bnf_close)
 
-#print(len(close_arr))
+############### CALCULATION ############### 
 
-####### CALCULATION ####### : relative_calc = np.ndarray.tolist(ta.RSI(close_arr[ix], timeperiod=4))
+relative_calc = np.ndarray.tolist(talib.RSI(close_arr, timeperiod=11))
 
-'''
-ix = 20
-for ix in close_arr:
-    relative_calc = np.ndarray.tolist(ta.RSI(bnf_close[ix], timeperiod=4))
-    print(close_arr[ix])
-    ix = ix + 1
+for i in range(len(bnf_close)):
+    print(close_arr[i])
+    if relative_calc[i] >= 80:
+        print(relative_calc[i],":Overbought\n")
+    elif relative_calc[i] <= 20:
+        print(relative_calc[i],":Oversold\n")
+    elif relative_calc[i] > 20 and relative_calc[i]<80:
+        print(relative_calc[i],"===\n")
+    i = i +1
+print("Value of i is:",i)
+print("LENGHT:",len(close_arr))
 
-
-##################
-
-b = 1
-for x in range (len(close_arr)):
-    print(close_arr[x], "Is the close number ", x)
-    print(b)
-    b = b + 1
-'''
-relative_calc = np.ndarray.tolist(ta.RSI(close_arr, timeperiod=4))
-print(relative_calc,"\n")
+#atr_calc = np.ndarray.tolist(ta.ATR(high_arr,low_arr,close_arr,timeperiod=14))
