@@ -1,17 +1,17 @@
 import numpy as np
 import talib 
-from nsepy import get_history as gh
+#from nsepy import get_history as gh
 import datetime as dt 
 
 
 #import values from nsepy and print technical indicator values
-symbol = 'BANKNIFTY'
-start = dt.date(2018,1,1)
-end = dt.date(2020,12,31)
+#symbol = 'BANKNIFTY'
+#start = dt.date(2018,1,1)
+#end = dt.date(2020,12,31)
 
 
 #get data
-data = gh(symbol, start, end, index=True)
+#data = gh(symbol, start, end, index=True)
 
 bnf_open = list((data["Open"]))
 bnf_high = list((data["High"]))
